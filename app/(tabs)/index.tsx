@@ -1,74 +1,78 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { ThemedText, ThemedView } from '@/components/base';
+import { IconSymbol } from '@/components/ui/IconSymbol';
+import { Colors } from '@/constants/Colors';
+import { Investments, Watchlist } from '@/data/stocks';
+import { StockItem } from '@/components/StockItem';
 
-export default function HomeScreen() {
+export default function Index() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <ThemedView isSafe style={styles.container}>
+      <ScrollView
+        style={styles.scrollable}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ minHeight: '100%', paddingBottom: 10 }}
+      >
+        {/* Hero */}
+        <View style={styles.hero}>
+          <ThemedText type="subhead" variant="secondary">
+            Portolio Balance
+          </ThemedText>
+          <ThemedText type="h1">$1804.38</ThemedText>
+          <ThemedText type="subhead" style={styles.heroCaption}>
+            <IconSymbol name="triangle.fill" size={8} color={Colors.success} />{' '}
+            $102.45 (6.75%)
+          </ThemedText>
+        </View>
+
+        {/* My Stocks */}
+        <View style={styles.content}>
+          <ThemedText type="h4" style={{ fontWeight: 'bold' }}>
+            Investments
+          </ThemedText>
+          <FlatList
+            data={Investments}
+            keyExtractor={(item) => item.symbol}
+            scrollEnabled={false}
+            style={{ marginBottom: 28 }}
+            renderItem={({ item }) => <StockItem {...item} />}
+          />
+
+          {/* Watchlist */}
+          <ThemedText type="h4" style={{ fontWeight: 'bold' }}>
+            Watchlist
+          </ThemedText>
+          <FlatList
+            data={Watchlist}
+            keyExtractor={(item) => item.symbol}
+            scrollEnabled={false}
+            renderItem={({ item }) => <StockItem {...item} />}
+          />
+        </View>
+      </ScrollView>
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  scrollable: {
+    flex: 1,
+    paddingHorizontal: 14,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  hero: {
+    justifyContent: 'center',
+    paddingTop: 20,
+    rowGap: 1,
+  },
+  heroCaption: {
+    color: Colors.success,
+  },
+  content: {
+    // flex: 1,
+    paddingTop: 28,
   },
 });

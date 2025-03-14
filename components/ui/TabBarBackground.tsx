@@ -1,4 +1,4 @@
-// This is a shim for web and Android where the tab bar is generally opaque.
+// Shim for web and Android, where tab bar is opaque
 export default undefined;
 
 export function useBottomTabOverflow() {
