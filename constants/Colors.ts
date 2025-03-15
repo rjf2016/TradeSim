@@ -12,4 +12,5 @@ export const Colors = {
   success: '#00C853',
   error: '#FF3830',
   sheet: '#1E1E1E',
+  highlight: '#007AFF',
 };

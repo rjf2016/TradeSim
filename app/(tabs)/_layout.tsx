@@ -4,8 +4,8 @@ import { Platform } from 'react-native';
 
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
 import { HapticTab } from '@/components/ui/HapticTab';
+import { Colors } from '@/constants/Colors';
 
 export default function TabLayout() {
   return (
@@ -16,13 +16,13 @@ export default function TabLayout() {
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarShowLabel: false,
-        tabBarStyle: Platform.select({
-          ios: {
+        tabBarStyle: {
+          backgroundColor: Colors.background,
+          borderTopColor: Colors.border,
+          ...(Platform.OS === 'ios' && {
             position: 'absolute',
-            borderTopColor: Colors.border,
-          },
-          default: {},
-        }),
+          }),
+        },
       }}
     >
       <Tabs.Screen
