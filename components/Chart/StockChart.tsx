@@ -1,30 +1,13 @@
 import React from 'react';
-import {
-  CartesianChart,
-  type ChartBounds,
-  type PointsArray,
-  useAreaPath,
-  useChartPressState,
-  useLinePath,
-} from 'victory-native';
+import { CartesianChart, useChartPressState } from 'victory-native';
 import {
   Circle,
-  Group,
   Line as SkiaLine,
-  LinearGradient,
-  Path,
-  Skia,
   Text as SkiaText,
   useFont,
   vec,
 } from '@shopify/react-native-skia';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  type TextStyle,
-  View,
-} from 'react-native';
+import { StyleSheet, type TextStyle, View } from 'react-native';
 import { format } from 'date-fns';
 import {
   type SharedValue,
