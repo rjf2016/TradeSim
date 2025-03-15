@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 
 import { ThemedText, ThemedView } from '@/components/base';
 import { Colors } from '@/constants/Colors';
-import { useRouter } from 'expo-router';
 
 type StockItemProps = {
   id: string;
@@ -29,7 +29,7 @@ export function StockItem({
   return (
     <TouchableOpacity
       onPress={() =>
-        router.push({ pathname: `/(modal)/stock/[id]`, params: { id } })
+        router.push({ pathname: `/(modal)/stock/[symbol]`, params: { symbol } })
       }
     >
       <ThemedView style={styles.container}>
